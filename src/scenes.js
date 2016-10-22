@@ -2,7 +2,9 @@ Crafty.scene('Game', function() {
   // A 2D arry to keep track of all occupied tiles
   //Crafty.background('rgb(255,0,0)');
 
-  Crafty.e('Fort1').attr({x:0,y:0})
+  Game.current_room = Crafty.e('Fort1').attr({x:0,y:0})
+
+
   Game.Inventory=Crafty.e('Inventory')
 
   function getMousePos(canvas, evt) {
@@ -19,6 +21,10 @@ Crafty.scene('Game', function() {
   pointer = Crafty.e('2D, Canvas, SpriteAnimation, normal_curser, Collision').attr({z:1})
   .reel('normal_curser',1000, 0,1,1)
   .reel('select_curser',1000, 1,1,1)
+  .reel('exit_left',1000, 0,0,1)
+  .reel('exit_down',1000, 1,0,1)
+  .reel('exit_right',1000, 2,0,1)
+  .reel('exit_up',1000, 3,0,1)
 
   pointer.bind('EnterFrame', function(){
     pointer.pickCurser()
@@ -27,7 +33,13 @@ Crafty.scene('Game', function() {
   pointer.pickCurser = function(){
     if(this.hit('BigItem') != false || this.hit('Inventory_Item') != false){
       this.animate('select_curser',-1)
-    }else{
+    }else if(this.hit('RoomExit') != false){
+      exit_direction = this.hit('RoomExit')[0].obj.exitDirection
+
+      this.animate(exit_direction, 1)
+
+    }
+    else{
       this.animate('normal_curser',-1)      
     }
 
@@ -61,8 +73,11 @@ Crafty.scene('Loading', function(){
 
     // Load our sprite map image
     Crafty.load([
-      'assets/fort1_demo.png',
+      'assets/FortFacingDoor.png',
+      'assets/FortFacingZipline.png',
       'assets/undertheFort_demo.png',
+      'assets/EndofZip.png',
+      'assets/zipline_thing.png',
       'assets/path1_demo.png',
       'assets/spritesheet1.png',
       'assets/spritesheet2.png'
@@ -74,16 +89,28 @@ Crafty.scene('Loading', function(){
       // These components' names are prefixed with "spr_"
       //  to remind us that they simply cause the entity
       //  to be drawn with a certain sprite
-      Crafty.sprite(768,512, 'assets/fort1_demo.png', {
+      Crafty.sprite(768,512, 'assets/FortFacingDoor.png', {
         spr_fort1_demo: [0, 0],
       })
+
+      Crafty.sprite(768,512, 'assets/FortFacingZipline.png', {
+        img_fort_zipline:    [0, 0],
+      });
 
       Crafty.sprite(768,512, 'assets/undertheFort_demo.png', {
         undertheFort_demo:    [0, 0],
       });
 
+      Crafty.sprite(768,512, 'assets/EndofZip.png', {
+        img_end_of_zip:    [0, 0],
+      });
+
       Crafty.sprite(768,512, 'assets/path1_demo.png', {
-        path1_demo:    [0, 0],
+        path_A_demo:    [0, 0],
+      });
+
+      Crafty.sprite(87,62, 'assets/zipline_thing.png', {
+        big_ZipThing_for_zippings:    [0, 0],
       });
 
       Crafty.sprite(32, 'assets/spritesheet1.png', {
@@ -94,6 +121,9 @@ Crafty.scene('Loading', function(){
 
       Crafty.sprite(64, 'assets/spritesheet2.png', {
         big_slingshot:    [0, 0],
+        little_slingshot:    [0, 1],
+        big_ZipThing:    [1, 0],
+        little_ZipThing:    [1, 1],
 
       });
 
