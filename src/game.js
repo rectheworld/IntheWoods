@@ -63,7 +63,13 @@ Game = {
  		"to_Path_A" : "Path_A",
  		"to_Fort1": "Fort1",
  		"to_fort_zip": "fort_zipline",
- 		"to_zip_bottom": "zip_bottom"
+ 		"to_zip_bottom": "zip_bottom",
+ 		"to_fork_A": "fork_A",
+ 		"to_fork_b": "fork_B",
+ 		"to_path_b": "path_b",
+ 		"to_fork_c": "fork_c",
+ 		"to_path_c": "path_c",
+ 		"to_bridge": "bridge"
 	 },
 
 

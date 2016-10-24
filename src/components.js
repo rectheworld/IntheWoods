@@ -150,54 +150,28 @@ Crafty.c("Below_Fort", {
 		.populate_items()
 
 		to_fort1 = Crafty.e('RoomExit')
-			.attr({x: 550,y: 50 ,w: 80, h: 280})
+			.attr({x: 600,y: 50 ,w: 80, h: 280})
 		to_fort1.exitDirection = 'exit_up'
 		to_fort1.destination = 'to_Fort1'
 		this.exit_object_list.push(to_fort1)
 
 		to_path_A = Crafty.e('RoomExit')
-		.attr({x: 50,y: 220 ,w: 100, h: 100})
-		to_path_A.exitDirection = 'exit_left'
+		.attr({x: 50,y: 125 ,w: 150, h: 150})
+		to_path_A.exitDirection = 'exit_up'
 		to_path_A.destination = 'to_Path_A'
 		this.exit_object_list.push(to_path_A)
+
+		to_fork_c = Crafty.e('RoomExit')
+		.attr({x: 475,y: 130 ,w: 150, h: 150})
+		to_fork_c.exitDirection = 'exit_right'
+		to_fork_c.destination = 'to_fork_c'
+		this.exit_object_list.push(to_fork_c)
 
 	},
 
 
 	name: "Below_Fort",
-	// item_object_list:[],
-	// exit_object_list:[],
 
-	// // bind("changeRoom", function(){
-	// // 	console.log('in change room')
-	// // }),
-
-	// populate_items: function(){
-	// 	for (i in Game.room_inventory[this.name]){
-	// 		//console.log(Game.room_inventory['Fort1'])
-	// 		this_obj = Game.room_inventory[this.name]
-	// 		for(j in this_obj){
-	// 			this_item = this_obj[j]
-	// 			if(this_item.active == true){
-	// 				Crafty.e(this_item.name).attr({x:this_item.x, y:this_item.y})
-	// 				this.item_object_list.push(element)
-	// 			}
-	// 	}
-	// 	} // end i loop 
-	// },
-
-	// 	kill_room: function(){
-	// 	for (i in this.item_object_list){
-
-	// 		this.item_object_list[i].destroy()
-	// 	} // end i loop 
-
-	// 	for (i in this.exit_object_list){
-
-	// 		this.exit_object_list[i].destroy()
-	// 	} // end i loop 
-	// 	this.destroy()
-	// },
 })
 
 
@@ -216,12 +190,193 @@ Crafty.c("Path_A", {
 		to_down_fort.destination = 'to_down_fort'
 		this.exit_object_list.push(to_down_fort)
 
+		to_fork_A = Crafty.e('RoomExit')
+		.attr({x: 300, y:140 ,w: 440, h: 110})
+		to_fork_A.exitDirection = 'exit_up'
+		to_fork_A.destination = 'to_fork_A'
+		this.exit_object_list.push(to_fork_A)
+
 	},
 
 
 	name: "Path_A",
 
 })
+
+
+Crafty.c("fork_A", {
+	init: function(){
+		this.requires('Room, fork1a_demo')
+		// .bind("changeRoom", function(){
+		// 	console.log('in change room')
+		// 	})
+
+		.populate_items()
+
+		to_Path_A = Crafty.e('RoomExit')
+		.attr({x: 51,y: 430 ,w: 700, h: 100})
+		to_Path_A.exitDirection = 'exit_down'
+		to_Path_A.destination = 'to_Path_A'
+		this.exit_object_list.push(to_Path_A)
+
+		to_fork_b = Crafty.e('RoomExit')
+		.attr({x: 450,y: 130 ,w: 150, h: 150})
+		to_fork_b.exitDirection = 'exit_right'
+		to_fork_b.destination = 'to_fork_b'
+		this.exit_object_list.push(to_fork_b)
+
+	},
+
+
+	name: "fork_A",
+
+})
+
+Crafty.c("fork_B", {
+	init: function(){
+		this.requires('Room, forkb_demo')
+		// .bind("changeRoom", function(){
+		// 	console.log('in change room')
+		// 	})
+
+		.populate_items()
+
+		to_fork_A = Crafty.e('RoomExit')
+		.attr({x: 51,y: 430 ,w: 700, h: 100})
+		to_fork_A.exitDirection = 'exit_down'
+		to_fork_A.destination = 'to_fork_A'
+		this.exit_object_list.push(to_fork_A)
+
+		to_path_b = Crafty.e('RoomExit')
+		.attr({x: 360,y: 64 ,w: 150, h: 150})
+		to_path_b.exitDirection = 'exit_up'
+		to_path_b.destination = 'to_path_b'
+		this.exit_object_list.push(to_path_b)
+
+	},
+
+
+	name: "fork_B",
+
+})
+
+Crafty.c("path_b", {
+	init: function(){
+		this.requires('Room, path_b_demo')
+		// .bind("changeRoom", function(){
+		// 	console.log('in change room')
+		// 	})
+
+		.populate_items()
+
+		to_fork_b = Crafty.e('RoomExit')
+		.attr({x: 51,y: 430 ,w: 700, h: 100})
+		to_fork_b.exitDirection = 'exit_down'
+		to_fork_b.destination = 'to_fork_b'
+		this.exit_object_list.push(to_fork_b)
+
+		to_fork_c = Crafty.e('RoomExit')
+		.attr({x: 300,y: 50 ,w: 150, h: 150})
+		to_fork_c.exitDirection = 'exit_up'
+		to_fork_c.destination = 'to_fork_c'
+		this.exit_object_list.push(to_fork_c)
+
+	},
+
+
+	name: "path_b",
+
+})
+
+
+Crafty.c("fork_c", {
+	init: function(){
+		this.requires('Room, fork_c_demo')
+		// .bind("changeRoom", function(){
+		// 	console.log('in change room')
+		// 	})
+
+		.populate_items()
+
+		to_path_b = Crafty.e('RoomExit')
+		.attr({x: 51,y: 300 ,w: 250, h: 300})
+		to_path_b.exitDirection = 'exit_left'
+		to_path_b.destination = 'to_path_b'
+		this.exit_object_list.push(to_path_b)
+
+		to_down_fort = Crafty.e('RoomExit')
+		.attr({x: 550,y: 300 ,w: 200, h: 200})
+		to_down_fort.exitDirection = 'exit_right'
+		to_down_fort.destination = 'to_down_fort'
+		this.exit_object_list.push(to_down_fort)
+
+		to_path_c = Crafty.e('RoomExit')
+		.attr({x: 300,y: 0 ,w: 300, h: 200})
+		to_path_c.exitDirection = 'exit_right'
+		to_path_c.destination = 'to_path_c'
+		this.exit_object_list.push(to_path_c)
+
+	},
+
+
+	name: "fork_c",
+
+})
+
+
+Crafty.c("path_c", {
+	init: function(){
+		this.requires('Room, path_c_demo')
+		// .bind("changeRoom", function(){
+		// 	console.log('in change room')
+		// 	})
+
+		.populate_items()
+
+		to_fork_c = Crafty.e('RoomExit')
+		.attr({x: 51,y: 430 ,w: 700, h: 100})
+		to_fork_c.exitDirection = 'exit_down'
+		to_fork_c.destination = 'to_fork_c'
+		this.exit_object_list.push(to_fork_c)
+
+		to_bridge = Crafty.e('RoomExit')
+		.attr({x: 250,y: 75 ,w: 200, h: 200})
+		to_bridge.exitDirection = 'exit_up'
+		to_bridge.destination = 'to_bridge'
+		this.exit_object_list.push(to_bridge)
+
+	},
+
+
+	name: "path_c",
+
+})
+
+
+Crafty.c("bridge", {
+	init: function(){
+		this.requires('Room, bridge_demo')
+		// .bind("changeRoom", function(){
+		// 	console.log('in change room')
+		// 	})
+
+		.populate_items()
+
+		to_path_c = Crafty.e('RoomExit')
+		.attr({x: 51,y: 430 ,w: 300, h: 300})
+		to_path_c.exitDirection = 'exit_left'
+		to_path_c.destination = 'to_path_c'
+		this.exit_object_list.push(to_path_c)
+
+	},
+
+
+	name: "bridge",
+
+})
+
+
+
 
 
 Crafty.c("fort_zipline", {
@@ -333,8 +488,6 @@ Crafty.c("Inventory", {
 		.attr({x:0, y:0, w:64, h: Game.screen_view.height, z: 1})
 		.color('rgb(192,192,192)')
 		.populate_inventory()
-
-		console.log('1')
 		
 	},
 
@@ -345,7 +498,6 @@ Crafty.c("Inventory", {
 	populate_inventory: function(){
 		current_y = 0
 
-		console.log(this.current_items)
 		for (i in Game.menu_inventory){
 
 
@@ -422,7 +574,7 @@ Crafty.c("Inventory_Item", {
 				}
 			}
 		}
-		console.log(home_bool)
+
 		return(home_bool)
 	}
 });

@@ -77,6 +77,12 @@ Crafty.scene('Loading', function(){
       'assets/FortFacingZipline.png',
       'assets/undertheFort_demo.png',
       'assets/EndofZip.png',
+      'assets/fork1a_demo.png',
+      'assets/ForkB_demo.png',
+      'assets/path_B.png',
+      'assets/fork1c_demo.png',
+      'assets/pathc_demo.png',
+      'assets/bridge.png',
       'assets/zipline_thing.png',
       'assets/path1_demo.png',
       'assets/spritesheet1.png',
@@ -107,6 +113,30 @@ Crafty.scene('Loading', function(){
 
       Crafty.sprite(768,512, 'assets/path1_demo.png', {
         path_A_demo:    [0, 0],
+      });
+
+      Crafty.sprite(768,512, 'assets/fork1a_demo.png', {
+        fork1a_demo:    [0, 0],
+      });
+
+      Crafty.sprite(768,512, 'assets/ForkB_demo.png', {
+        forkb_demo:    [0, 0],
+      });
+
+      Crafty.sprite(768,512, 'assets/path_B.png', {
+        path_b_demo:    [0, 0],
+      });
+
+      Crafty.sprite(768,512, 'assets/fork1c_demo.png', {
+        fork_c_demo:    [0, 0],
+      });
+
+      Crafty.sprite(768,512, 'assets/pathc_demo.png', {
+        path_c_demo:    [0, 0],
+      });
+
+      Crafty.sprite(768,512, 'assets/bridge.png', {
+        bridge_demo:    [0, 0],
       });
 
       Crafty.sprite(87,62, 'assets/zipline_thing.png', {
