@@ -83,6 +83,9 @@ Crafty.scene('Loading', function(){
       'assets/fork1c_demo.png',
       'assets/pathc_demo.png',
       'assets/bridge.png',
+      'assets/riverEdge.png',
+      'assets/well.png',
+      'assets/well_zoomin.png',
       'assets/zipline_thing.png',
       'assets/path1_demo.png',
       'assets/spritesheet1.png',
@@ -137,6 +140,18 @@ Crafty.scene('Loading', function(){
 
       Crafty.sprite(768,512, 'assets/bridge.png', {
         bridge_demo:    [0, 0],
+      });
+
+      Crafty.sprite(768,512, 'assets/riverEdge.png', {
+        riverEdge_demo:    [0, 0],
+      });
+
+      Crafty.sprite(768,512, 'assets/well.png', {
+        well_demo:    [0, 0],
+      });
+
+      Crafty.sprite(768,512, 'assets/well_zoomin.png', {
+        well_zoomin_demo:    [0, 0],
       });
 
       Crafty.sprite(87,62, 'assets/zipline_thing.png', {

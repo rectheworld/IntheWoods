@@ -74,6 +74,7 @@ Crafty.c("RoomExit", {
 			Game.current_room.kill_room()
 			next_room = Game.edges[this.destination]
 			Game.current_room = Crafty.e(next_room)
+
 		})
 	}
 });
@@ -311,7 +312,7 @@ Crafty.c("fork_c", {
 		this.exit_object_list.push(to_down_fort)
 
 		to_path_c = Crafty.e('RoomExit')
-		.attr({x: 300,y: 0 ,w: 300, h: 200})
+		.attr({x: 300,y: 0 ,w: 150, h: 150})
 		to_path_c.exitDirection = 'exit_right'
 		to_path_c.destination = 'to_path_c'
 		this.exit_object_list.push(to_path_c)
@@ -340,7 +341,7 @@ Crafty.c("path_c", {
 		this.exit_object_list.push(to_fork_c)
 
 		to_bridge = Crafty.e('RoomExit')
-		.attr({x: 250,y: 75 ,w: 200, h: 200})
+		.attr({x: 250,y: 75 ,w: 200, h: 100})
 		to_bridge.exitDirection = 'exit_up'
 		to_bridge.destination = 'to_bridge'
 		this.exit_object_list.push(to_bridge)
@@ -368,10 +369,102 @@ Crafty.c("bridge", {
 		to_path_c.destination = 'to_path_c'
 		this.exit_object_list.push(to_path_c)
 
+		to_river_edge = Crafty.e('RoomExit')
+		.attr({x: 630,y: 310 ,w: 300, h: 300})
+		to_river_edge.exitDirection = 'exit_right'
+		to_river_edge.destination = 'to_river_edge'
+		this.exit_object_list.push(to_river_edge)
+
 	},
 
 
 	name: "bridge",
+
+})
+
+Crafty.c("river_edge", {
+	init: function(){
+		this.requires('Room, riverEdge_demo')
+		// .bind("changeRoom", function(){
+		// 	console.log('in change room')
+		// 	})
+
+		.populate_items()
+
+		to_bridge = Crafty.e('RoomExit')
+		.attr({x: 51,y: 430 ,w: 700, h: 300})
+		to_bridge.exitDirection = 'exit_down'
+		to_bridge.destination = 'to_bridge'
+		this.exit_object_list.push(to_bridge)
+
+		to_well = Crafty.e('RoomExit')
+		.attr({x: 595,y: 150 ,w: 150, h: 150})
+		to_well.exitDirection = 'exit_up'
+		to_well.destination = 'to_well'
+		this.exit_object_list.push(to_well)
+
+	},
+
+
+	name: "river_edge",
+
+})
+
+Crafty.c("well", {
+	init: function(){
+		this.requires('Room, well_demo')
+		// .bind("changeRoom", function(){
+		// 	console.log('in change room')
+		// 	})
+
+		.populate_items()
+
+		to_river_edge = Crafty.e('RoomExit')
+		.attr({x: 50,y: 190 ,w: 50, h: 90})
+		to_river_edge.exitDirection = 'exit_left'
+		to_river_edge.destination = 'to_bridge'
+		this.exit_object_list.push(to_river_edge)
+
+		to_zip_bottom = Crafty.e('RoomExit')
+		.attr({x: 50,y: 340 ,w: 50, h: 90})
+		to_zip_bottom.exitDirection = 'exit_left'
+		to_zip_bottom.destination = 'to_zip_bottom'
+		this.exit_object_list.push(to_zip_bottom)
+
+		to_well_zoom = Crafty.e('RoomExit')
+		.attr({x: 290,y: 100 ,w: 150, h: 200})
+		to_well_zoom.exitDirection = 'exit_up'
+		to_well_zoom.destination = 'to_well_zoom'
+		this.exit_object_list.push(to_well_zoom)
+
+	},
+
+
+	name: "river_edge",
+
+})
+
+
+Crafty.c("well_zoom", {
+	init: function(){
+		this.requires('Room, well_zoomin_demo')
+		// .bind("changeRoom", function(){
+		// 	console.log('in change room')
+		// 	})
+
+		.populate_items()
+
+		to_well = Crafty.e('RoomExit')
+		.attr({x: 51,y: 430 ,w: 700, h: 300})
+		to_well.exitDirection = 'exit_down'
+		to_well.destination = 'to_well'
+		this.exit_object_list.push(to_well)
+
+
+	},
+
+
+	name: "well_zoom",
 
 })
 
@@ -409,6 +502,12 @@ Crafty.c("zip_bottom", {
 		// 	})
 
 		.populate_items()
+
+	to_well = Crafty.e('RoomExit')
+		.attr({x: 400,y: 70 ,w: 130, h: 100})
+	to_well.exitDirection = 'exit_up'
+	to_well.destination = 'to_well'
+	this.exit_object_list.push(to_well)
 
 	},
 
@@ -460,11 +559,18 @@ Crafty.c("ZipThing_for_Zipping",{
 		Game.current_room.item_object_list.push(this)
 		
 		this.bind('Click', function(){
+			Game.room_inventory.fort_zipline.ZipThing.active = false
+			Game.room_inventory.fort_zipline.ZipThing_for_Zipping.active = false
+
+			Game.room_inventory.zip_bottom.ZipThing_for_Zipping_bottom.active = true
+
 			Game.current_room.to_zip_bottom = Crafty.e('RoomExit')
 			Game.current_room.exit_object_list.push(Game.current_room.to_zip_bottom)
 			Game.current_room.to_zip_bottom.attr({x: 510,y: 35 ,w: 90, h: 62})
 			Game.current_room.to_zip_bottom.exitDirection = 'exit_left'
 			Game.current_room.to_zip_bottom.destination = 'to_zip_bottom'
+
+
 			
 		})
 
@@ -492,43 +598,49 @@ Crafty.c("Inventory", {
 	},
 
 	name: "Invet",
-	current_y: 0,
+	//current_y: 0,
 	current_items: [],
+	slots: {'1': {y: 0, full: false},
+			'2': {y: 64, full: false},
+			'3': {y: 128, full: false},
+			'4': {y: 192, full: false},
+			'5': {y: 256, full: false},
+			'6': {y: 320, full: false},
+			'7': {y: 384, full:false},
+			},
 
 	populate_inventory: function(){
-		current_y = 0
+
 
 		for (i in Game.menu_inventory){
-
 
 			this_item = Game.menu_inventory[i]
 
 			if(this_item.active == true){
-				//console.log(this.current_items.indexOf(this_item.name))
+				//console.log(this.current_items)
+
 				if(this.current_items.indexOf(this_item.name) == -1){
 
-				this.current_y = this.current_y + 64
-				Crafty.e(this_item.name).attr({x:0, y:this.current_y}).attr({z:1})
+					console.log(this.slots)
+
+					for(slot in this.slots){
+						if(this.slots[slot].full === false){
+							current_y = this.slots[slot].y
+							this.slots[slot].full = true
+							this_item.slot = slot
+
+							break
+						}
+					}
+
+				Crafty.e(this_item.name).attr({x:0, y:current_y}).attr({z:1})
+
 
 				this.current_items.push(this_item.name)
 
 				}
 
 			}
-
-			// this_obj = Game.menu_inventory
-			// console.log("i ", i)
-
-			// for(j in this_obj){
-			// 	console.log("j", j)
-			// 	current_y = current_y + 64
-			// 	this_item = this_obj[j]
-
-			// 	if(this_item.active == true){
-			// 		Crafty.e(this_item.name).attr({x:0, y:current_y}).attr({z:1})
-			// 		console.log(this_item, this_item.active)
-			// 	}
-			// }
 		} // end i loop 
 	}
 });
@@ -549,8 +661,17 @@ Crafty.c("Inventory_Item", {
 			this.stopDrag()
 
 			if(this.check_if_home(this)){
+				
 				var index = Game.Inventory.current_items.indexOf(this.name);
-				Game.Inventory.current_items.splice(index)
+				if(index != -1) {
+						Game.Inventory.current_items.splice(index, 1);
+					}
+
+				// need to clear the menu slot this was in
+				slot_to_clear = Game.menu_inventory[this.menu_name].slot
+				Game.menu_inventory[this.menu_name].slot = null
+				Game.Inventory.slots[slot_to_clear].full = false 
+
 				Crafty.e(this.big_name)
 				this.destroy()
 			}
@@ -586,7 +707,8 @@ Crafty.c("Slingshot_mini",{
 	},
 
 	home: {room: null},
-	name: 'Slingshot_mini'
+	name: 'Slingshot_mini',
+	menu_name: "Slingshot",
 });
 
 
@@ -598,6 +720,15 @@ Crafty.c("ZipThing_mini",{
 	home: {room: 'fort_zipline', x : 480, y : 30, w: 150, h: 50},
 	name: 'ZipThing_mini',
 	big_name: 'ZipThing_for_Zipping',
+	menu_name: "ZipThing",
+
+});
+
+
+Crafty.c("Clown",{
+	init: function(){
+
+	},
 
 });
 

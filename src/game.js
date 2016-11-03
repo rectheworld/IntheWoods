@@ -45,16 +45,18 @@ Game = {
 	    'Slingshot':
 		    {'name': 'Slingshot_mini',
 		    'active': false,
-			'room_found': "Fort1"},
+			'room_found': "Fort1",
+			'slot': null},
 		'ZipThing':{
 			'name':'ZipThing_mini',
 			'active': false,
-			'room_found' : 'fort_zipline'
-		},
+			'room_found' : 'fort_zipline',
+			'slot': null},
 		'ZipThing_for_Zipping_bottom':{
 			'name':'ZipThing_mini',
 			'active': false,
-			'room_found' : 'zip_bottom'
+			'room_found' : 'zip_bottom',
+			'slot': null
 		}
 	 },
 
@@ -69,7 +71,21 @@ Game = {
  		"to_path_b": "path_b",
  		"to_fork_c": "fork_c",
  		"to_path_c": "path_c",
- 		"to_bridge": "bridge"
+ 		"to_bridge": "bridge",
+ 		"to_river_edge": "river_edge",
+ 		"to_well": "well",
+ 		"to_well_zoom": "well_zoom"
+	 },
+
+	 maps: {
+	 	"Below_Fort": ['Path_A', "fork_c"],
+	 	"Path_A":["Below_Fort", "fork_A"],
+	 	"fork_A":["path_b"],
+	 	"path_b" : ["fork_A", "fork_c"],
+	 	"fork_c" : ["path_b", "path_c", "Below_Fort"],
+	 	"path_c" :["fork_c", "bridge"],
+	 	"bridge" : ["river_edge","path_c"],
+	 	"river_edge": ["bridge", "well"] 
 	 },
 
 
